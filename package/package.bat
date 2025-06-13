@@ -1,3 +1,5 @@
+@echo off
+
 REM set your sdk path
 set SDK=C:\Nordic\nRF5_SDK_15.3.0_59ac345
 
@@ -26,7 +28,7 @@ set PRIVATEKEY=..\..\dfu\private.key
 
 
 REM make image for ROM FLASHING
-mkdir Output
+If not exist Output mkdir Output
 nrfutil settings generate --family %FAMILY% --application %APP% --application-version 1 --bootloader-version 1 --bl-settings-version 1 Output\settings.hex
 mergehex --merge %SOFTDEVICE% %BOOTLOADER% --output Output\SD_BL.hex
 mergehex --merge Output\SD_BL.hex %APP% --output Output\SD_BL_APP.hex
